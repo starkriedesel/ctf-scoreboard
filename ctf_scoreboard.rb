@@ -29,8 +29,16 @@ class CtfScoreboard < Sinatra::Base
   # Show progress of players
   get '/scoreboard' do
     authorize!
-    @user = current_user
     @users = User.all.to_a
+    @tracks = Track.all.to_a
+    unless params[:track].nil?
+      @track = Track.where(name: params[:track]).first
+      @users = @users.map do |user|
+        track_flags = user.flags.select{|flag| flag.track.id == @track.id}
+        user.score = track_flags.map(&:points).inject(:+)
+        user
+      end
+    end
     haml :scoreboard
   end
 

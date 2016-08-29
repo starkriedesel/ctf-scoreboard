@@ -1,7 +1,15 @@
 .green {
+  $color: #4caf50; // green
+  .card-header {
+    color: $color;
+  }
+  &.pure-button, thead {
+    background: $color;
+    color: #fff;
+  }
   &.track-table {
     .track-header {
-      background: #4caf50; // green
+      background: $color;
       &:hover {
         background: #66bb6a; // lighten-1
       }
@@ -19,9 +27,17 @@
 }
 
 .orange {
+  $color: #ff5722; // deep-orange
+  .card-header {
+    color: $color;
+  }
+  &.pure-button, thead {
+    background: $color;
+    color: #fff;
+  }
   &.track-table {
     .track-header {
-      background: #ff5722; // deep-orange
+      background: $color;
       &:hover {
         background: #ff7043; //lighten-1
       }
@@ -39,12 +55,17 @@
 }
 
 .blue {
+  $color: #03a9f4; // light-blue
   .card-header {
-    color: #03a9f4;
+    color: $color;
+  }
+  &.pure-button, thead {
+    background: $color;
+    color: #fff;
   }
   &.track-table {
     .track-header {
-      background: #03a9f4; // light-blue
+      background: $color;
       &:hover {
         background: #29b6f6; // lighten-1
       }
@@ -62,9 +83,17 @@
 }
 
 .purple {
+  $color: #673ab7; // deep-purple
+  .card-header {
+    color: $color;
+  }
+  &.pure-button, thead {
+    background: $color;
+    color: #fff;
+  }
   &.track-table {
     .track-header {
-      background: #673ab7; // deep-purple
+      background: $color;
     }
     .track-list li{
       background: #ede7f6; // lighten-5

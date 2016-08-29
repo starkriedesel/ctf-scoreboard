@@ -2,11 +2,20 @@
   .pure-u-1.pure-u-md-1-5
   .pure-u-1.pure-u-md-3-5
     .pure-g.card
+      .pure-u-1
+        - active = params[:track].nil? ? 'pure-button-active' : ''
+        %a.pure-button(href="/scoreboard" class="#{active}") Overall
+        - @tracks.each do |track|
+          - active = params[:track] == track.name ? 'pure-button-active' : ''
+          %a.pure-button(href="/scoreboard?track=#{track.name}" class="#{active} #{track.color}")= track.name
+    .pure-g.card
       .pure-u-1.card-header
         %h1(style="text-align: center")
+          - unless @track.nil?
+            = @track.name
           Scoreboard
       .pure-u-1
-        %table.pure-table.pure-table-horizontal(style="width:100%")
+        %table.pure-table.pure-table-horizontal(style="width:100%" class="#{@track.nil? ? '' : @track.color}")
           %thead
             %tr
               %th Place
