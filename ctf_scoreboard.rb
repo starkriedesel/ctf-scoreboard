@@ -47,9 +47,21 @@ class CtfScoreboard < Sinatra::Base
     @user = current_user
     @track = Track.find(params[:id])
     begin
-      haml :"track_#{@track.name.downcase}", layout: :track_layout
+      haml :"#{@track.view}", layout: :track_layout
     rescue
-      ''
+      haml :track_no_details, layout: :track_layout
+    end
+  end
+
+  get '/flag/:id' do
+    authorize!
+    @user = current_user
+    @flag = Flag.find(params[:id])
+    @track = @flag.track
+    begin
+      haml :"#{@flag.view}", layout: :track_layout
+    rescue
+      haml :flag_no_hints, layout: :track_layout
     end
   end
 

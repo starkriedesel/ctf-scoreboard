@@ -174,4 +174,10 @@ html {
   }
 }
 
+blockquote {
+  margin-left: 0.5em;
+  padding-left: 0.5em;
+  border-left: #888 solid 2px;
+}
+
 @import "colors";

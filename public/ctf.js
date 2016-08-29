@@ -18,10 +18,10 @@ $(function () {
   }
 });
 
-function loadTrack(id) {
+function loadDetails(src) {
   // Load track details from AJAX
   var track_details = $('.track-details');
-  track_details.load("/track/"+id, function () {
+  track_details.load(src, function () {
     // Show div
     track_details.show();
   });
