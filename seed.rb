@@ -10,10 +10,11 @@ def seed!
 
   puts "Seeding tracks"
   Track.all.delete
-  windows = Track.create!({name: 'Windows', color: 'blue', order: 2, diagram: '/windows_network.svg'})
+  windows = Track.create!({name: 'Windows', color: 'blue', order: 4, diagram: '/windows_network.svg'})
   linux   = Track.create!({name: 'Linux',   color: 'orange', order: 3})
-  web     = Track.create!({name: 'Web',     color: 'green', order: 4})
+  web     = Track.create!({name: 'Web',     color: 'green', order: 2})
   iot     = Track.create!({name: 'IoT',     color: 'purple', order: 1})
+  crypto  = Track.create!({name: 'Crypto',  color: 'red', order: 5})
 
   puts "Seeding flag"
   Flag.all.delete
@@ -30,6 +31,9 @@ def seed!
   iot10     = Flag.create!({points: 10, track: iot, value: 'flag{Iot1}', order: 1})
   iot20     = Flag.create!({points: 20, track: iot, value: 'flag{Iot2}', order: 2})
   iot30     = Flag.create!({points: 30, track: iot, value: 'flag{Iot3}', order: 3})
+  crypto10  = Flag.create!({points: 10, track: crypto, value: 'flag{Crypto1}', order:1})
+  crypto20  = Flag.create!({points: 20, track: crypto, value: 'flag{Crypto2}', order:1})
+  crypto30  = Flag.create!({points: 30, track: crypto, value: 'flag{Crypto3}', order:1})
 
   puts "Seeding completed flags"
   user1.flags << windows10

@@ -106,3 +106,28 @@
     }
   }
 }
+
+.red {
+  $color: #f44336; // red
+  .card-header {
+    color: $color;
+  }
+  &.pure-button, thead {
+    background: $color;
+    color: #fff;
+  }
+  &.track-table {
+    .track-header {
+      background: $color;
+    }
+    .track-list li{
+      background: #ffebee; // lighten-5
+      &.completed {
+        background: #ef9a9a; // lighten-3
+      }
+      &.locked {
+        background: #c62828; // darken-3
+      }
+    }
+  }
+}

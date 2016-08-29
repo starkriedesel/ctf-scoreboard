@@ -5,7 +5,7 @@
       .pure-u-1
         - active = params[:track].nil? ? 'pure-button-active' : ''
         %a.pure-button(href="/scoreboard" class="#{active}") Overall
-        - @tracks.each do |track|
+        - @tracks.sort_by{|t| t.order}.each do |track|
           - active = params[:track] == track.name ? 'pure-button-active' : ''
           %a.pure-button(href="/scoreboard?track=#{track.name}" class="#{active} #{track.color}")= track.name
     .pure-g.card
