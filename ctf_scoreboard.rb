@@ -1,0 +1,98 @@
+require 'bundler'
+Bundler.require
+require './models/user'
+require './models/track'
+require './models/flag'
+
+Mongoid.load!('./mongoid.yml', :development)
+
+require './seed'
+seed!
+
+class CtfScoreboard < Sinatra::Base
+  register Sinatra::Warden
+  enable :sessions
+  set :session_secret, "secretKey"
+  use Rack::Flash, sweep: true
+
+  get '/login' do
+    @error = env['x-rack.flash'][:error]
+    haml :login
+  end
+
+  # Redirec to login or scoreboard
+  get '/' do
+    redirect to('/login') if current_user.nil?
+    redirect to('/tracks')
+  end
+
+  # Show progress of players
+  get '/scoreboard' do
+    authorize!
+    @user = current_user
+    @users = User.all.to_a
+    haml :scoreboard
+  end
+
+  # Show player progress and flag submision
+  get '/tracks' do
+    authorize!
+    @user = current_user
+    @tracks = Track.all.order_by(order: :asc).to_a
+    haml :tracks
+  end
+
+  # Submit a flag
+  post '/flag' do
+    authorize!
+    @user = current_user
+    if params['value'].blank?
+      flash[:error] = 'No flag submited'
+    else
+      flags = Flag.where(value: params['value'])
+      if flags.count == 0
+        flash[:error] = 'Incorrect flag value'
+      elsif flags.count > 1
+        flash[:error] = 'Multiple flags matched'
+      else
+        flag = flags.first
+        if flag.locked or flag.track.locked
+          flash[:error] = 'The flag or track is locked'
+        elsif @user.flags.include? flag
+          flash[:error] = 'You have already submitted this flag'
+        else
+          @user.flags << flag
+          @user.update_score
+          flash[:success] = "Flag &laquo;#{flag.track.name} #{flag.name}&raquo; submitted! You earned #{flag.points} points"
+        end
+      end
+    end
+    redirect to('/tracks')
+  end
+
+  post '/register' do
+    user = User.new({
+      email: params[:email],
+      name: params[:username],
+      password: params[:password]
+    })
+    if user.valid?
+      if user.save
+        login params
+        redirect to('/')
+        return
+      else
+        flash[:error] = 'User could not be saved to database'
+      end
+    else
+      flash[:error] = user.errors.full_messages.join '; '
+    end
+    redirect to('/login')
+  end
+
+  get '/layout.css' do
+    scss :layout
+  end
+
+  run! if app_file == $0
+end

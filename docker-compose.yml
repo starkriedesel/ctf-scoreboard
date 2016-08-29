@@ -1,0 +1,14 @@
+mongo:
+  image: mongo
+
+server:
+  image: ruby:2.3
+  working_dir: /usr/src/app
+  volumes:
+    - .:/usr/src/app
+  links:
+    - mongo
+  ports:
+    - 9292:9292
+  command: bash -c "bundle install --path vendor/bundle && bundle exec rackup -o 0.0.0.0 -p 9292"
+

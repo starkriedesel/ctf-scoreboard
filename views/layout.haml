@@ -1,0 +1,47 @@
+!!!5
+
+%html
+  %head
+    %title Ctf Scoreboard
+    %link(rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css")
+    %link(rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css")
+    %link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
+    %link(rel="stylesheet" href="/layout.css")
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
+  %body
+    .pure-menu.pure-menu-horizontal
+      %a.pure-menu-heading(href='/') CTF
+      %ul.pure-menu-list
+        - if current_user.nil?
+          - links = { '/login' => 'Login' }
+        - else
+          - links = { '/scoreboard' => 'Scoreboard', '/tracks' => 'Tracks', '/logout' => 'Logout' }
+        - links.each do |path, name|
+          - if request.path_info == path
+            - link_class = "pure-menu-selected"
+          - else
+            - link_class = ""
+          %li.pure-menu-item{class: link_class}
+            %a.pure-menu-link{href: path}= name
+        - unless current_user.nil?
+          %li.pure-menu-separator
+          %li.pure-menu-item
+            .pure-menu-heading
+              Logged in as
+              %strong
+                = current_user.name
+              = "(Score: #{current_user.score})"
+
+    - unless flash[:error].blank?
+      .content.pure-g.card.error
+        .pure-u-1
+          = flash[:error]
+    - unless flash[:success].blank?
+      .content.pure-g.card.success
+        .pure-u-1
+          = flash[:success]
+
+    = yield
+    %script(src="/jquery-3.1.0.min.js")
+    %script(src="/ctf.js")
+
