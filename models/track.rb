@@ -3,6 +3,7 @@ class Track
 
   field :name, type: String
   field :color, type: String, default: ''
+  field :diagram, type: String, default: ''
   field :locked, type: Boolean, default: false
   field :order, type: Integer
 

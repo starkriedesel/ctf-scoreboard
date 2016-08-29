@@ -5,7 +5,7 @@ def seed!
 
   puts "Seeding tracks"
   Track.all.delete
-  windows = Track.create!({name: 'Windows', color: 'blue', order: 2})
+  windows = Track.create!({name: 'Windows', color: 'blue', order: 2, diagram: '/windows_network.svg'})
   linux   = Track.create!({name: 'Linux',   color: 'orange', order: 3})
   web     = Track.create!({name: 'Web',     color: 'green', order: 4})
   iot     = Track.create!({name: 'IoT',     color: 'purple', order: 1})

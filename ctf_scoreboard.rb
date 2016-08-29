@@ -47,7 +47,7 @@ class CtfScoreboard < Sinatra::Base
     @user = current_user
     @track = Track.find(params[:id])
     begin
-      haml :"track_#{@track.name.downcase}", layout: nil
+      haml :"track_#{@track.name.downcase}", layout: :track_layout
     rescue
       ''
     end

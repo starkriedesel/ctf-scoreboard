@@ -18,9 +18,11 @@ $(function () {
   }
 });
 
-function loadTrack(name, src) {
-  $('.card-body').load(src, function () {
-    $('.card-title').text(name);
-    $('.track-details').show();
+function loadTrack(id) {
+  // Load track details from AJAX
+  var track_details = $('.track-details');
+  track_details.load("/track/"+id, function () {
+    // Show div
+    track_details.show();
   });
 }

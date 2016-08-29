@@ -1,0 +1,19 @@
+.pure-u-1.pure-u-md-1-2
+  .pure-g.card(class="#{@track.color}")
+    .pure-u-1.card-header
+      %h1
+        %span.fa.fa-train
+        = @track.name
+        Details
+    .pure-u-1.card-body
+      = yield
+- unless @track.diagram.blank?
+  .pure-u-1.pure-u-md-1-2
+    .pure-g.card.network-diagram(class="#{@track.color}")
+      .pure-u-1.card-header.right
+        %h1
+          = @track.name
+          Network
+          %span.fa.fa-exchange
+      .pure-u-1.card-body
+        %img(src="#{@track.diagram}")

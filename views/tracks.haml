@@ -29,16 +29,13 @@
           Submit
           %span.fa.fa-flag
 
-.content.pure-g.track-details.card(style="display:none")
-  .pure-u-1.card-header
-    %h1.card-title Track
-  .pure-u-1.card-body
+.content.pure-g.track-details(style="display:none")
 
 .content.track-tables.pure-g
   - @tracks.each do |track|
     .pure-u-1.pure-u-md-1-3
       .track-table(class="#{track.color}")
-        %a(href="#" onclick="loadTrack('#{track.name}','/track/#{track.id}')")
+        %a(href="#" onclick="loadTrack('#{track.id}')")
           .track-header
             %span.title
               = track.name

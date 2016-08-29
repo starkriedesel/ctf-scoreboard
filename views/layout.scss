@@ -29,7 +29,7 @@ html {
   box-shadow: 0 3px 1px rgba(0,0,0,0.10);
   background: #fff;
   margin: 1.5em auto;
-  padding: 10px;
+  padding: 0.5em;
   &.error {
     box-shadow: 0 3px 1px rgba(0,82,82,0.20);
     background: #ff8a80;
@@ -126,84 +126,9 @@ html {
           cursor: not-allowed;
         }
       }
-      a {
-        li:hover {
-          background: #fff !important;
-          color: #000;
-        }
-      }
-    }
-
-
-    &.green {
-      .track-header {
-        background: #4caf50; // green
-        &:hover {
-          background: #66bb6a; // lighten-1
-        }
-      }
-      .track-list li {
-        background: #e8f5e9; // lighten-5
-        &.completed {
-          background: #a5d6a7; // lighten-3
-        }
-        &.locked {
-          background: #2e7d32; // darken-3
-        }
-      }
-    }
-
-    &.orange {
-      .track-header {
-        background: #ff5722; // deep-orange
-        &:hover {
-          background: #ff7043; //lighten-1
-        }
-      }
-      .track-list li {
-        background: #fbe9e7; // lighten-5
-        &.completed {
-          background: #ffab91; // lighten-3
-        }
-        &.locked {
-          background: #d84315; // darken-3
-        }
-      }
-    }
-
-    &.blue {
-      .track-header {
-        background: #03a9f4; // light-blue
-        &:hover {
-          background: #29b6f6; // lighten-1
-        }
-      }
-      .track-list li{
-        background: #e1f5fe; // lighten-5
-        &.completed {
-          background: #81d4fa; // lighten-3
-        }
-        &.locked {
-          background: #0277bd; // darken-3
-        }
-      }
-    }
-
-    &.purple {
-      .track-header {
-        background: #673ab7; // deep-purple
-        &:hover {
-          background: #7e57c2; // lighten-1
-        }
-      }
-      .track-list li{
-        background: #ede7f6; // lighten-5
-        &.completed {
-          background: #b39ddb; // lighten-3
-        }
-        &.locked {
-          background: #4527a0; // darken-3
-        }
+      a li:hover {
+        background: #fff !important;
+        color: #000;
       }
     }
   }
@@ -224,3 +149,29 @@ html {
     color: #888;
   }
 }
+
+@media screen and (min-width: 48em) {
+  .track-details .card {
+    margin-left: -0.5em;
+    margin-right: 1.0em;
+    margin-top: 0;
+    &.network-diagram {
+      margin-left: 0.5em;
+      margin-right: -0.5em;
+    }
+  }
+}
+
+.track-details {
+  li {
+    padding: 0.2em 0;
+  }
+  .network-diagram {
+    text-align: center;
+    img {
+      width: 100%
+    }
+  }
+}
+
+@import "colors";

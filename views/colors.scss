@@ -1,0 +1,79 @@
+.green {
+  &.track-table {
+    .track-header {
+      background: #4caf50; // green
+      &:hover {
+        background: #66bb6a; // lighten-1
+      }
+    }
+    .track-list li {
+      background: #e8f5e9; // lighten-5
+      &.completed {
+        background: #a5d6a7; // lighten-3
+      }
+      &.locked {
+        background: #2e7d32; // darken-3
+      }
+    }
+  }
+}
+
+.orange {
+  &.track-table {
+    .track-header {
+      background: #ff5722; // deep-orange
+      &:hover {
+        background: #ff7043; //lighten-1
+      }
+    }
+    .track-list li {
+      background: #fbe9e7; // lighten-5
+      &.completed {
+        background: #ffab91; // lighten-3
+      }
+      &.locked {
+        background: #d84315; // darken-3
+      }
+    }
+  }
+}
+
+.blue {
+  .card-header {
+    color: #03a9f4;
+  }
+  &.track-table {
+    .track-header {
+      background: #03a9f4; // light-blue
+      &:hover {
+        background: #29b6f6; // lighten-1
+      }
+    }
+    .track-list li{
+      background: #e1f5fe; // lighten-5
+      &.completed {
+        background: #81d4fa; // lighten-3
+      }
+      &.locked {
+        background: #0277bd; // darken-3
+      }
+    }
+  }
+}
+
+.purple {
+  &.track-table {
+    .track-header {
+      background: #673ab7; // deep-purple
+    }
+    .track-list li{
+      background: #ede7f6; // lighten-5
+      &.completed {
+        background: #b39ddb; // lighten-3
+      }
+      &.locked {
+        background: #4527a0; // darken-3
+      }
+    }
+  }
+}
