@@ -18,3 +18,9 @@ $(function () {
   }
 });
 
+function loadTrack(name, src) {
+  $('.card-body').load(src, function () {
+    $('.card-title').text(name);
+    $('.track-details').show();
+  });
+}

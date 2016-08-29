@@ -29,11 +29,16 @@
           Submit
           %span.fa.fa-flag
 
+.content.pure-g.track-details.card(style="display:none")
+  .pure-u-1.card-header
+    %h1.card-title Track
+  .pure-u-1.card-body
+
 .content.track-tables.pure-g
   - @tracks.each do |track|
     .pure-u-1.pure-u-md-1-3
       .track-table(class="#{track.color}")
-        %a(href="#")
+        %a(href="#" onclick="loadTrack('#{track.name}','/track/#{track.id}')")
           .track-header
             %span.title
               = track.name

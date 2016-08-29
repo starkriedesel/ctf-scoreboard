@@ -42,6 +42,17 @@ class CtfScoreboard < Sinatra::Base
     haml :tracks
   end
 
+  get '/track/:id' do
+    authorize!
+    @user = current_user
+    @track = Track.find(params[:id])
+    begin
+      haml :"track_#{@track.name.downcase}", layout: nil
+    rescue
+      ''
+    end
+  end
+
   # Submit a flag
   post '/flag' do
     authorize!
