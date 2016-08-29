@@ -13,7 +13,7 @@
       %a.pure-menu-heading(href='/') CTF
       %ul.pure-menu-list
         - if current_user.nil?
-          - links = { '/login' => 'Login' }
+          - links = { '/scoreboard' => 'Scoreboard', '/login' => 'Login' }
         - else
           - links = { '/scoreboard' => 'Scoreboard', '/tracks' => 'Tracks', '/logout' => 'Logout' }
         - links.each do |path, name|

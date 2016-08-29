@@ -50,12 +50,7 @@ html {
 
 .login-body {
   input, button {
-    width: 90%;
-  }
-  &.right {
-    input, button {
-      float: right;
-    }
+    width: 100%;
   }
 }
 
@@ -151,14 +146,18 @@ html {
 }
 
 @media screen and (min-width: 48em) {
-  .track-details .card {
-    margin-left: -0.5em;
-    margin-right: 1.0em;
-    margin-top: 0;
-    &.network-diagram {
-      margin-left: 0.5em;
-      margin-right: -0.5em;
+  .track-details, .login {
+    .card {
+      margin-left: -0.5em;
+      margin-right: 1.0em;
+      &.right-card {
+        margin-left: 0.5em;
+        margin-right: -0.5em;
+      }
     }
+  }
+  .track-details .card {
+    margin-top: 0;
   }
 }
 
@@ -178,6 +177,10 @@ blockquote {
   margin-left: 0.5em;
   padding-left: 0.5em;
   border-left: #888 solid 2px;
+}
+
+.rules li {
+  padding: 0.2em 0;
 }
 
 @import "colors";

@@ -26,9 +26,12 @@ class CtfScoreboard < Sinatra::Base
     redirect to('/tracks')
   end
 
+  get '/rules' do
+    haml :rules
+  end
+
   # Show progress of players
   get '/scoreboard' do
-    authorize!
     @users = User.all.to_a
     @tracks = Track.all.to_a
     unless params[:track].nil?
@@ -131,7 +134,7 @@ class CtfScoreboard < Sinatra::Base
     elsif @user.valid?
       if @user.save
         login params
-        redirect to('/')
+        redirect to('/rules')
         return
       else
         flash[:error] = 'User could not be saved to database'
