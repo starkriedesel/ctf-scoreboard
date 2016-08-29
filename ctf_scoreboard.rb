@@ -82,9 +82,8 @@ class CtfScoreboard < Sinatra::Base
       redirect to('/login')
     else
       email_parts = params[:email].split('@')
-      @user.name = email_parts.first
       domain = email_parts.last.split('.').last(2).join('.')
-      @user.affiliation = User::AFFILIATIONS[domain] || domain
+      @user.affiliation = User::AFFILIATIONS[domain] || ''
       haml :register
     end
   end
@@ -92,11 +91,13 @@ class CtfScoreboard < Sinatra::Base
   post '/register/complete' do
     @user = User.new({
       email: params[:email],
-      password: params[:password],
       name: params[:name],
+      password: params[:password],
       affiliation: params[:affiliation]
     })
-    if @user.valid?
+    if params[:password] != params[:confirm]
+      flash[:error] = 'Password confirmation doesn\'t match password'
+    elsif @user.valid?
       if @user.save
         login params
         redirect to('/')
@@ -105,9 +106,9 @@ class CtfScoreboard < Sinatra::Base
         flash[:error] = 'User could not be saved to database'
       end
     else
-      flash[:error] = user.errors.full_messages.join '; '
+      flash[:error] = @user.errors.full_messages.join '; '
     end
-    redirect to('/login')
+    haml :register
   end
 
   get '/layout.css' do
