@@ -12,7 +12,12 @@ class User
   validates_uniqueness_of :name, :email
   validates_presence_of :name, :email, :password, :score
 
-  AFFILIATIONS = ['SMU', 'UTD', 'UNT', 'Cigital']
+  AFFILIATIONS = {
+    'smu.edu' => 'SMU',
+    'utdallas.edu' => 'UTD',
+    'unt.edu' => 'UNT',
+    'cigital.com' => 'Cigital'
+  }
 
   def update_score
     self.score = flags.to_a.map(&:points).inject(&:+)

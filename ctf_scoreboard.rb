@@ -71,13 +71,33 @@ class CtfScoreboard < Sinatra::Base
   end
 
   post '/register' do
-    user = User.new({
-      email: params[:email],
-      name: params[:username],
-      password: params[:password]
+    @user = User.new({
+      email: params[:email]
     })
-    if user.valid?
-      if user.save
+    if @user.email.blank?
+      flash[:error] = 'Email is required'
+      redirect to('/login')
+    elsif User.where(email: @user.email).count > 0
+      flash[:error] = 'Email is already registers'
+      redirect to('/login')
+    else
+      email_parts = params[:email].split('@')
+      @user.name = email_parts.first
+      domain = email_parts.last.split('.').last(2).join('.')
+      @user.affiliation = User::AFFILIATIONS[domain] || domain
+      haml :register
+    end
+  end
+
+  post '/register/complete' do
+    @user = User.new({
+      email: params[:email],
+      password: params[:password],
+      name: params[:name],
+      affiliation: params[:affiliation]
+    })
+    if @user.valid?
+      if @user.save
         login params
         redirect to('/')
         return

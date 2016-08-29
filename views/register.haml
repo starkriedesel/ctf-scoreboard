@@ -1,0 +1,27 @@
+.content.card.pure-g.registration
+  .pure-u-1-1.pure-u-md-1-2.registration-header
+    %h1
+      %span.fa.fa-sign-in
+      Complete Registration
+  .pure-u-1-1.pure-u-md-1-2.registration-header
+    &nbsp;
+  .pure-u-1-1.pure-u-md-2-3.registration-body
+    %form.pure-form.pure-form-aligned#complete-registration-form(action="/register/complete" method="post")
+      %fieldset
+        .pure-control-group
+          %label(for="email") Email
+          %input(type="email" placeholder="Email" name="email" disabled="true" value="#{@user.email}")
+        .pure-control-group
+          %label(for="name") Name
+          %input(type="text" placeholder="Username" name="name" value="#{@user.name}")
+        .pure-control-group
+          %label(for="affiliation") Affiliation
+          %input(type="text" placeholder="Affiliation" name="affiliation" value="#{@user.affiliation}")
+        .pure-control-group
+          %label(for="password") Password
+          %input(type="password" placeholder="Password" name="password" id="password")
+        .pure-control-group
+          %label(for="confirm") Confirm
+          %input(type="password" placeholder="Confirm Password" id="confirm")
+        .pure-controls
+          %button.pure-button.pure-button-primary(type="submit") Login

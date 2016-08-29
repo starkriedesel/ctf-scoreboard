@@ -2,25 +2,9 @@ html {
   background: #efebe9;
 }
 
-.content.pure-g {
+.content {
   max-width: 960px;
   margin: 0 auto;
-  &.card {
-    box-shadow: 0 3px 1px rgba(0,0,0,0.10);
-    background: #fff;
-    margin: 1.5em auto;
-    padding: 10px;
-    &.error {
-      box-shadow: 0 3px 1px rgba(0,82,82,0.20);
-      background: #ff8a80;
-      font-weight: bold;
-    }
-    &.success {
-      box-shadow: 0 3px 1px rgba(0,241,118,0.20);
-      background: #00e676;
-      font-weight: bold;
-    }
-  }
   .right {
     text-align: right;
   }
@@ -41,29 +25,47 @@ html {
   text-transform: none !important;
 }
 
-.card.instructions, .card.login {
-  .instructions-header, .login-header {
+.card {
+  box-shadow: 0 3px 1px rgba(0,0,0,0.10);
+  background: #fff;
+  margin: 1.5em auto;
+  padding: 10px;
+  &.error {
+    box-shadow: 0 3px 1px rgba(0,82,82,0.20);
+    background: #ff8a80;
+    font-weight: bold;
+  }
+  &.success {
+    box-shadow: 0 3px 1px rgba(0,241,118,0.20);
+    background: #00e676;
+    font-weight: bold;
+  }
+  .card-header {
     border-bottom: 1px solid #000;
     h1 {
       margin: 0;
     }
   }
-  .instructions-body, .login-body {
-    li {
-      padding: 0.2em 0;
+}
+
+.login-body {
+  input, button {
+    width: 90%;
+  }
+  &.right {
+    input, button {
+      float: right;
     }
   }
+}
 
-  #login-form, #register-form {
-    input, button {
-      width: 90%;
-    }
+.content.instructions {
+  ol, fieldset {
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
-
-  #register-form {
-    input, button {
-      float:right;
-    }
+  li {
+    padding: 0.2em 0;
   }
 }
 
@@ -71,6 +73,7 @@ html {
   text-align: center;
 
   .track-table {
+    box-shadow: 0 3px 1px rgba(0,0,0,0.30);
     border: 1px solid #ddd;
     margin: 0 0.5em 2em;
     padding: 0;
@@ -79,7 +82,11 @@ html {
       font-size: 1.5em;
     }
     a {
+      color: inherit;
       text-decoration: none;
+      &:hover {
+        text-shadow: 1px 2px rgba(0,0,0,0.2);
+      }
     }
 
     .track-header {
@@ -105,15 +112,19 @@ html {
         background: #fafafa;
         &.completed{
           background: #e0e0e0;
+          cursor: not-allowed;
         }
         &.locked {
           background: #424242;
           color: #fff;
+          cursor: not-allowed;
         }
       }
       a {
-        color: inherit;
-        text-decoration: none;
+        li:hover {
+          background: #fff !important;
+          color: #000;
+        }
       }
     }
 
@@ -121,6 +132,9 @@ html {
     &.green {
       .track-header {
         background: #4caf50; // green
+        &:hover {
+          background: #66bb6a; // lighten-1
+        }
       }
       .track-list li {
         background: #e8f5e9; // lighten-5
@@ -136,6 +150,9 @@ html {
     &.orange {
       .track-header {
         background: #ff5722; // deep-orange
+        &:hover {
+          background: #ff7043; //lighten-1
+        }
       }
       .track-list li {
         background: #fbe9e7; // lighten-5
@@ -151,6 +168,9 @@ html {
     &.blue {
       .track-header {
         background: #03a9f4; // light-blue
+        &:hover {
+          background: #29b6f6; // lighten-1
+        }
       }
       .track-list li{
         background: #e1f5fe; // lighten-5
@@ -166,6 +186,9 @@ html {
     &.purple {
       .track-header {
         background: #673ab7; // deep-purple
+        &:hover {
+          background: #7e57c2; // lighten-1
+        }
       }
       .track-list li{
         background: #ede7f6; // lighten-5
@@ -185,4 +208,13 @@ html {
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: rgb(28, 184, 65);
+}
+
+.scoreboard {
+  .card-header {
+    margin-bottom: 1em;
+  }
+  .no-affiliation {
+    color: #888;
+  }
 }
