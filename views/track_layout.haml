@@ -16,6 +16,7 @@
       %blockquote
         Remember flags will be in the form
         %strong flag{xxxxx}
+      %button.pure-button(onclick="loadDetails(null)") Close
 - unless @track.diagram.blank?
   .pure-u-1.pure-u-md-1-2
     .pure-g.card.right-card.network-diagram(class="#{@track.color}")
