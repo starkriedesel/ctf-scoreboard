@@ -5,11 +5,14 @@ class User
   field :email, type: String
   field :password, type: String
   field :score, type: Integer, default: 0
+  field :affiliation, type: String, default: ''
 
   has_and_belongs_to_many :flags
 
   validates_uniqueness_of :name, :email
   validates_presence_of :name, :email, :password, :score
+
+  AFFILIATIONS = ['SMU', 'UTD', 'UNT', 'Cigital']
 
   def update_score
     self.score = flags.to_a.map(&:points).inject(&:+)
