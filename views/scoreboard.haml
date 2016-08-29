@@ -1,7 +1,7 @@
 .content.pure-g.scoreboard
-  .pure-u-1.pure-u-md-1-5
-  .pure-u-1.pure-u-md-3-5
-    .pure-g.card
+  .pure-u-1.pure-u-md-1-6
+  .pure-u-1.pure-u-md-2-3
+    .pure-g.card.scoreboard-links
       .pure-u-1
         - active = params[:track].nil? ? 'pure-button-active' : ''
         %a.pure-button(href="/scoreboard" class="#{active}") Overall
@@ -33,4 +33,4 @@
                       None
                   - else
                     = user.affiliation
-                %td= user.score
+                %td= user.score || 0
