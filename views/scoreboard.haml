@@ -23,7 +23,9 @@
               %th Affiliation
               %th Score
           %tbody
+            - @users = @users.sort_by{|u| -u.score }
             - @users.each_with_index do |user, index|
+              - next if user.score <= 0
               %tr
                 %td= index + 1
                 %td= user.name

@@ -146,6 +146,11 @@ html {
   .no-affiliation {
     color: #888;
   }
+  table tbody {
+    tr:nth-child(1) {
+      border-bottom: 2px solid #000;
+    }
+  }
 }
 
 @media screen and (min-width: 48em) {

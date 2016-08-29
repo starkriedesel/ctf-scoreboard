@@ -32,7 +32,7 @@ class CtfScoreboard < Sinatra::Base
 
   # Show progress of players
   get '/scoreboard' do
-    @users = User.all.to_a
+    @users = User.where(hide: false).all.to_a
     @tracks = Track.all.to_a
     unless params[:track].nil?
       @track = Track.where(name: params[:track]).first
@@ -41,6 +41,7 @@ class CtfScoreboard < Sinatra::Base
         user.score = track_flags.map(&:points).inject(:+)
         user
       end
+      @users.each {|u| u.score = u.score.to_i}
     end
     haml :scoreboard
   end

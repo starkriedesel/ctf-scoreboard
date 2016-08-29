@@ -6,6 +6,7 @@ class User
   field :password, type: String
   field :score, type: Integer, default: 0
   field :affiliation, type: String, default: ''
+  field :hide, type: Boolean, default: false
 
   has_and_belongs_to_many :flags
 
