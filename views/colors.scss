@@ -94,6 +94,9 @@
   &.track-table {
     .track-header {
       background: $color;
+      &:hover {
+        background: #7e57c2; // lighten-1
+      }
     }
     .track-list li{
       background: #ede7f6; // lighten-5
@@ -119,6 +122,9 @@
   &.track-table {
     .track-header {
       background: $color;
+      &:hover {
+        background: #ef5350; // lighten-1
+      }
     }
     .track-list li{
       background: #ffebee; // lighten-5
