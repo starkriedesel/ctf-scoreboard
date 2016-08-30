@@ -191,4 +191,14 @@ blockquote {
   padding: 0.2em 0;
 }
 
+.sponsors .card {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  text-align: center;
+  overflow: hidden;
+  img {
+    height: 2.5em;
+  }
+}
+
 @import "colors";
