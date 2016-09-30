@@ -1,7 +1,20 @@
 require './ctf_scoreboard'
 
+class UserLoggerWardenManager < Warden::Manager
+  def call(env)
+    result = super
+    if env['warden'].authenticated?
+      email = env['warden'].user.email
+      email = email.split(' ').join
+      env['REMOTE_USER'] = email
+    end
+    result
+  end
+end
+
 app = Rack::Builder.new do
-  use Warden::Manager do |manager|
+  #use Warden::Manager do |manager|
+  use UserLoggerWardenManager do |manager|
     manager.default_strategies :password
     manager.failure_app = CtfScoreboard
     manager.serialize_into_session do |user|
