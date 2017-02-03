@@ -11,7 +11,7 @@ seed!
 
 class CtfScoreboard < Sinatra::Base
   register Sinatra::Warden
-  enable :sessions
+  enable :sessions, :logging
   set :session_secret, "secretKey"
   use Rack::Flash, sweep: true
 
@@ -81,27 +81,36 @@ class CtfScoreboard < Sinatra::Base
   post '/flag' do
     authorize!
     @user = current_user
+    log_obj = {user: @user.email, flag_id: nil, success: false}
     if params['value'].blank?
-      flash[:error] = 'No flag submited'
+      log_obj[:error] = 'No flag submitted'
     else
+      log_obj[:flag_value] = params['value']
       flags = Flag.where(value: params['value'])
       if flags.count == 0
-        flash[:error] = 'Incorrect flag value'
+        log_obj[:error] = 'Incorrect flag value'
       elsif flags.count > 1
-        flash[:error] = 'Multiple flags matched'
+        log_obj[:error] = 'Multiple flags matched'
       else
         flag = flags.first
+        log_obj[:flag_name] = "#{flag.track.name}/#{flag.name}"
+        log_obj[:flag_points] = flag.points
         if flag.locked or flag.track.locked
-          flash[:error] = 'The flag or track is locked'
+          log_obj[:error] = 'The flag or track is locked'
         elsif @user.flags.include? flag
-          flash[:error] = 'You have already submitted this flag'
+          log_obj[:error] = 'You have already submitted this flag'
         else
           @user.flags << flag
           @user.update_score
           flash[:success] = "Flag &laquo;#{flag.track.name} #{flag.name}&raquo; submitted! You earned #{flag.points} points"
+          log_obj[:success] = 1
         end
       end
     end
+    unless log_obj[:error].nil?
+      flash[:error] = log_obj[:error]
+    end
+    logger.info log_obj.to_json.lines.join(' ')
     redirect to('/tracks')
   end
 
@@ -148,6 +157,12 @@ class CtfScoreboard < Sinatra::Base
 
   get '/layout.css' do
     scss :layout
+  end
+
+  get '/user/:id' do
+    @user = User.find(params[:id])
+    @tracks = Track.all.order_by(order: :asc).to_a
+    haml :user
   end
 
   run! if app_file == $0

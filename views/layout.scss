@@ -201,4 +201,25 @@ blockquote {
   }
 }
 
+.user-stats{
+  .card {
+    padding-left: 3em;
+    padding-right: 3em;
+//    padding-top: 0;
+//    padding-bottom: 0;
+  }
+  h1 {
+    margin: 0;
+  }
+  .user-name {
+    text-align: left;
+  }
+  .user-affiliation {
+    text-align: center;
+  }
+  .user-score {
+    text-align: right;
+  }
+}
+
 @import "colors";
