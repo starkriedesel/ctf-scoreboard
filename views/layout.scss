@@ -54,6 +54,15 @@ html {
   }
 }
 
+.registration-body {
+  button {
+    width: 100%;
+  }
+  .pure-u-1-4 {
+    padding-top: 0.5em;
+  }
+}
+
 .complete-registration {
   input, button {
     width: 15em;

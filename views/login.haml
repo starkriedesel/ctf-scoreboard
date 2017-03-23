@@ -8,7 +8,7 @@
       .pure-u-1.login-body
         %form.pure-form(action="/login" method="post")
           %fieldset.pure-group
-            %input(type="email" placeholder="Email" name="email")
+            %input(type="text" placeholder="Team Name" name="name")
             %input(type="password" placeholder="Password" name="password")
             %button.pure-button.pure-button-primary(type="submit") Login
   .pure-u-1.pure-u-md-1-2
@@ -17,8 +17,34 @@
         %h1
           Register
           %span.fa.fa-user-plus
-      .pure-u-1.login-body.right
-        %form.pure-form(action="/register" method="post")
+      .pure-u-1.registration-body
+        -#
+          %form.pure-form(action="/register" method="post")
+            %fieldset.pure-group
+              %input(type="email" placeholder="Email" name="email")
+              %button.pure-button.button-success(type="submit") Register
+        %form.pure-form#complete-registration-form(action="/register/complete" method="post")
           %fieldset.pure-group
-            %input(type="email" placeholder="Email" name="email")
-            %button.pure-button.button-success(type="submit") Register
+            .pure-g
+              .pure-u-1-4
+                %label(for="name") Name
+              .pure-u-3-4
+                %input(type="text" placeholder="Team Name" name="name" required="required")
+              .pure-u-1-4
+                %label(for="affiliation") Affiliation
+              .pure-u-3-4
+                %select#affiliation-select
+                  %option(value="") Other
+                  - User::AFFILIATIONS.each do |_, name|
+                    %option(value="#{name}")= name
+                %input#affiliation-text(type="text" placeholder="Affiliation" name="affiliation" required="required")
+              .pure-u-1-4
+                %label(for="password") Password
+              .pure-u-3-4
+                %input(type="password" placeholder="Password" name="password" required="required")
+              .pure-u-1-4
+                %label(for="confirm") Confirm
+              .pure-u-3-4
+                %input(type="password" placeholder="Confirm Password" name="confirm" required="required")
+              .pure-u-1
+                %button.pure-button.pure-button-primary(type="submit") Login
