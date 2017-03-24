@@ -4,9 +4,9 @@ class UserLoggerWardenManager < Warden::Manager
   def call(env)
     result = super
     if env['warden'].authenticated?
-      email = env['warden'].user.email
-      email = email.split(' ').join
-      env['REMOTE_USER'] = email
+      name = env['warden'].user.name
+      name = name.split(' ').join
+      env['REMOTE_USER'] = name
     end
     result
   end
@@ -27,10 +27,10 @@ app = Rack::Builder.new do
 
   Warden::Strategies.add(:password) do
     def valid?
-      params['email'] && params['password']
+      params['name'] && params['password']
     end
     def authenticate!
-      user = User.authenticate(params['email'], params['password'])
+      user = User.authenticate(params['name'], params['password'])
       user.nil? ? fail!('Could not login') : success!(user)
     end
   end

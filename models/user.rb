@@ -10,8 +10,8 @@ class User
 
   has_and_belongs_to_many :flags
 
-  validates_uniqueness_of :name, :email
-  validates_presence_of :name, :email, :password, :score
+  validates_uniqueness_of :name
+  validates_presence_of :name, :password, :score
 
   AFFILIATIONS = {
     'smu.edu' => 'SMU',
@@ -25,8 +25,8 @@ class User
     save
   end
 
-  def self.authenticate(email, password)
-    user = User.where(email: email).first
+  def self.authenticate(name, password)
+    user = User.where(name: name).first
     if user.nil?
       nil
     else

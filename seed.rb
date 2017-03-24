@@ -1,56 +1,59 @@
 def seed!
-  puts "Seeding users"
+  full_seed!
+  update_seed!
+end
+
+def update_seed!
+end
+
+def clear!
   User.all.delete
-  admin = User.create!({name: 'admin', email: 'admin@example.com', password: 'admin', hide: true})
-  user1 = User.create!({name: 'user1', email: 'user1@example.com', password: 'user', affiliation: 'SMU'})
-  user2 = User.create!({name: 'user2', email: 'user2@example.com', password: 'user', affiliation: 'UTD'})
-  user3 = User.create!({name: 'user3', email: 'user3@example.com', password: 'user', affiliation: 'UNT'})
-  user4 = User.create!({name: 'user4', email: 'user4@example.com', password: 'user', affiliation: 'Cigital'})
-  user5 = User.create!({name: 'user5', email: 'user5@example.com', password: 'user'})
+  Track.all.delete
+  Flag.all.delete
+end
+
+def full_seed!
+  puts "Clearing db"
+  clear!
+
+  puts "Seeding users"
+  admin = User.create!({name: 'admin', password: 'admin', hide: true})
 
   puts "Seeding tracks"
-  Track.all.delete
-  windows = Track.create!({name: 'Windows', color: 'blue', order: 1, diagram: '/windows_network.svg'})
-  linux   = Track.create!({name: 'Linux',   color: 'orange', order: 2})
-  web     = Track.create!({name: 'Web',     color: 'green', order: 3})
-  iot     = Track.create!({name: 'IoT',     color: 'purple', order: 5})
-  crypto  = Track.create!({name: 'Crypto',  color: 'red', order: 4})
-  other   = Track.create!({name: 'Other',   color: 'red', order: 5})
+  windows    = Track.create!({name: 'Windows', color: 'blue', order: 1, diagram: '/windows_network.svg'})
+  linux      = Track.create!({name: 'Linux',   color: 'orange', order: 2})
+  web        = Track.create!({name: 'Challenge',     color: 'green', order: 3})
+  crypto     = Track.create!({name: 'Challenge',     color: 'green', order: 4})
+  reversing  = Track.create!({name: 'Challenge',     color: 'green', order: 5})
+  other      = Track.create!({name: 'Other',   color: 'red', order: 6})
 
   puts "Seeding flag"
-  Flag.all.delete
-  windows10 = Flag.create!({name: 'Access', points: 10, track: windows, value: 'flag{Win1}', order: 1})
-  windows20 = Flag.create!({name: 'Snoop', points: 20, track: windows, value: 'flag{Win2}', order: 2})
-  windows30 = Flag.create!({name: 'Piviot', points: 30, track: windows, value: 'flag{Win3}', order: 3})
-  windows40 = Flag.create!({name: 'Escelate',  points: 40, track: windows, value: 'flag{Win4}', order: 4})
-  windows50 = Flag.create!({name: 'Domain', points: 50, track: windows, value: 'flag{Win5}', order: 5})
-  linux10   = Flag.create!({points: 10, track: linux, value: 'flag{Linux1}', order: 1})
-  linux20   = Flag.create!({points: 20, track: linux, value: 'flag{Linux2}', order: 2})
-  linux30   = Flag.create!({points: 30, track: linux, value: 'flag{Linux3}', order: 3})
-  linux40   = Flag.create!({points: 40, track: linux, value: 'flag{Linux4}', order: 4})
-  linux50   = Flag.create!({points: 50, track: linux, value: 'flag{Linux5}', order: 5})
-  web10     = Flag.create!({points: 10, track: web, value: 'flag{Web1}', order: 1})
-  web20     = Flag.create!({points: 20, track: web, value: 'flag{Web2}', order: 2})
-  web30     = Flag.create!({points: 30, track: web, value: 'flag{Web3}', order: 3})
-  iot10     = Flag.create!({points: 10, track: iot, value: 'flag{Iot1}', order: 1})
-  iot20     = Flag.create!({points: 20, track: iot, value: 'flag{Iot2}', order: 2})
-  iot30     = Flag.create!({points: 30, track: iot, value: 'flag{Iot3}', order: 3})
-  crypto10  = Flag.create!({points: 10, track: crypto, value: 'flag{Crypto1}', order:1})
-  crypto20  = Flag.create!({points: 20, track: crypto, value: 'flag{Crypto2}', order:1})
-  crypto30  = Flag.create!({points: 30, track: crypto, value: 'flag{Crypto3}', order:1})
+
+  # Windows Flags
+
+  # Linux Flags
+  Flag.create!({name: 'Recon', points: 10, track: linux, value: 'FLAG{xyz}', order: 1})
+  Flag.create!({name: 'R00t', points: 10, track: linux, value: 'FLAG{abc}', order: 2})
+
+  # Crypto Flags
+  Flag.create!({name: 'Brute', points: 10, track: crypto, value: 'FLAG{crypto1}', order: 1})
+  Flag.create!({name: '^Enc', points: 10, track: crypto, value: 'FLAG{crypto2}', order: 2})
+  Flag.create!({name: 'Rand', points: 10, track: crypto, value: 'FLAG{crypto3}', order: 3})
+  Flag.create!({name: 'OTP', points: 10, track: crypto, value: 'FLAG{crypto4}', order: 4})
+
+  # Reversing Flags
+  Flag.create!({name: 'BASIC', points: 10, track: reversing, value: 'FLAG{reversing1}', order: 1})
+  Flag.create!({name: 'GDB', points: 10, track: reversing, value: 'FLAG{reversing2}', order: 2})
+  Flag.create!({name: 'APK', points: 10, track: reversing, value: 'FLAG{reversing3}', order: 3})
+
+  # Web Flags
+  Flag.create!({name: 'SQLi 1', points: 10, track: reversing, value: 'FLAG{web1}', order: 1})
+  Flag.create!({name: 'SQLi 2', points: 10, track: reversing, value: 'FLAG{web2}', order: 2})
+  Flag.create!({name: 'MongoDB 1', points: 10, track: reversing, value: 'FLAG{web3', order: 3})
+  Flag.create!({name: 'MongoDB 2', points: 10, track: reversing, value: 'FLAG{web4}', order: 4})
+  Flag.create!({name: 'PHP', points: 10, track: reversing, value: 'FLAG{web5}', order: 5})
+
+  # Other Flags
 
   puts "Seeding completed flags"
-  user1.flags << windows10
-  user1.flags << linux10
-  user1.flags << linux20
-  user2.flags << linux10
-  user2.flags << web10
-  user1.flags << web10
-  user3.flags << iot10
-  user3.flags << iot20
-  user3.flags << iot30
-  user3.flags << web10
-  user1.update_score
-  user2.update_score
-  user3.update_score
 end

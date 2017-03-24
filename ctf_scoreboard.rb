@@ -6,9 +6,6 @@ require './models/flag'
 
 Mongoid.load!('./mongoid.yml', :development)
 
-require './seed'
-seed!
-
 class CtfScoreboard < Sinatra::Base
   register Sinatra::Warden
   enable :sessions, :logging
@@ -81,7 +78,7 @@ class CtfScoreboard < Sinatra::Base
   post '/flag' do
     authorize!
     @user = current_user
-    log_obj = {user: @user.email, flag_id: nil, success: false}
+    log_obj = {user: @user.name, flag_id: nil, success: false}
     if params['value'].blank?
       log_obj[:error] = 'No flag submitted'
     else
@@ -134,7 +131,6 @@ class CtfScoreboard < Sinatra::Base
 
   post '/register/complete' do
     @user = User.new({
-      email: params[:email],
       name: params[:name],
       password: params[:password],
       affiliation: params[:affiliation]
