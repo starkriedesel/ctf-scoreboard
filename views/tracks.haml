@@ -45,7 +45,7 @@
               = track.name
               %span.fa.fa-train
         %ul.track-list
-          - track.flags.order_by(order: :asc).each do |flag|
+          - track.visible_flags(@user).each do |flag|
             - if @user.flags.include? flag
               %li.completed
                 = flag.name

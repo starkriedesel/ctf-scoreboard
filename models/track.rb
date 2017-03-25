@@ -11,4 +11,10 @@ class Track
   has_many :flags
 
   validates_presence_of :name, :order
+
+  def visible_flags(user)
+    self.flags.order_by(order: :asc).all.to_a.select do |f|
+      (! f.hide) || user.flags.include?(f)
+    end
+  end
 end
